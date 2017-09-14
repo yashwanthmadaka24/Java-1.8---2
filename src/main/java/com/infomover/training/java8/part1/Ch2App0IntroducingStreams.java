@@ -14,13 +14,37 @@ public class Ch2App0IntroducingStreams {
 		Stream<String> streamOfNames = names.stream();
 
 		List<String> morganCompanies = streamOfNames
+										.parallel()
+										.unordered()
 										.filter(name -> {
 											
-											System.out.println("filtering: " + name);
+											
+											if (name.equals("JP Morgan"))  {
+												System.out.println("*** start filtering: " + name + " " + Thread.currentThread().getName());
+												
+												try {
+													Thread.sleep(3000);
+												} catch (InterruptedException e) {
+													// TODO Auto-generated catch block
+													e.printStackTrace();
+												}
+
+												System.out.println("*** end filtering: " + name + " " + Thread.currentThread().getName());
+
+												
+												
+											} else {
+												
+												System.out.println("filtering: " + name + " " + Thread.currentThread().getName());
+
+											}
+											
 											return name.contains("Morgan");
 										})
 										.map(name -> {
-											System.out.println("mapping : " + name);
+											
+											System.out.println("mapping: " + name + " " + Thread.currentThread().getName());
+
 											return name.toUpperCase();
 										})
 										.collect(Collectors.toList());

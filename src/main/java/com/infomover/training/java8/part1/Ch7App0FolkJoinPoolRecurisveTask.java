@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
+import java.util.stream.Collectors;
 
 
 public class Ch7App0FolkJoinPoolRecurisveTask {
@@ -39,6 +40,9 @@ class MyRecursiveTask2 extends RecursiveTask<String> {
 	@Override
 	protected String compute() {
 
+		System.out.println("compute : " + Thread.currentThread().getName());
+		
+		
 		if (arr.length > THRESHOLD) {
 			// fork
 
@@ -49,11 +53,22 @@ class MyRecursiveTask2 extends RecursiveTask<String> {
 			List<MyRecursiveTask2> tasks = Arrays.asList(t1, t2);
 			Collection<MyRecursiveTask2> submittedTasks = ForkJoinTask.invokeAll(tasks);
 
-			String concatenatedString = "";
-			for (MyRecursiveTask2 t : submittedTasks) {
-				String val = t.join();
-				concatenatedString = concatenatedString + val;
-			}
+		//	String concatenatedString = "";
+//			for (MyRecursiveTask2 t : submittedTasks) {
+//				String val = t.join();
+//				concatenatedString = concatenatedString + val;
+//			}
+			
+			String concatenatedString =  submittedTasks
+			   .stream()
+			   .map(x -> {
+				   
+				   System.out.println("Stream processing : " + Thread.currentThread().getName());
+				   return x.join();
+				   
+			   })
+			   .collect(Collectors.joining());
+			
 			// java 1.8
 			// sum = submittedTasks
 			// .stream()

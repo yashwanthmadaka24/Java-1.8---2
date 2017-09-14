@@ -36,7 +36,7 @@ public class Ch4App1EntertheCollector {
 		
 		Map<Integer, Integer>  numbers4 =  numbers2
 				.stream()
-				.collect(Collectors.toMap(x -> x, x -> x * 10));
+				.collect(Collectors.toMap(   x -> x,      x -> x * 10    ));
 		
 		
 		numbers4.forEach((x, y) -> System.out.println(x + " -- " +  y));
@@ -62,8 +62,13 @@ public class Ch4App1EntertheCollector {
 		
 		
 		Stream<Employee> employees2 = HealthData.employeeList.stream();
+		
+		
 		Function<Employee, Long> getCount = 
 				  employee -> employee.getDependents().count();
+
+	    
+				  
 
 		
 		emp = employees2

@@ -160,6 +160,7 @@ public class Ch4App6RefactoringAndCustomCollectorsPart2 {
 								 return accumulatorBuilder;
 							 },
 						(left, right) -> {
+							
 							return left.append(right);
 				 });
 				

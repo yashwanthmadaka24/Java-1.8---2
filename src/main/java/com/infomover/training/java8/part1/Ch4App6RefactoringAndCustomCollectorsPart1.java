@@ -1,6 +1,7 @@
 package com.infomover.training.java8.part1;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.infomover.training.java8.model.Employee;
@@ -15,16 +16,25 @@ public class Ch4App6RefactoringAndCustomCollectorsPart1 {
 		// Java 1.7 way of 
 		
 		List<Employee> emps = HealthData.employeeList;
+		
+		
+		
 		StringBuilder builder = new StringBuilder("[");
+		
 		for (Employee emp : emps) {
 
 			if (builder.length() > 1)
 				builder.append(", ");
+			
 			String name = emp.getName();
 			builder.append(name);
 		}
+		
 		builder.append("]");
+		
 		String result = builder.toString();
+		
+		
 		
 		System.out.println(result);
 		
@@ -55,14 +65,19 @@ public class Ch4App6RefactoringAndCustomCollectorsPart1 {
 		Stream<String> ss = Stream.of("string-1", "string-2", "string-3", "string-4", "string-5", "string-6", "string-7");
 		
 		
-		//Optional<String> reducedString = ss.reduce((accumulator, element) -> accumulator + " , " +  element);
+		Optional<String> reducedString = 
+				 ss.reduce( (accumulator, element) -> accumulator + " , " +  element   );
+		
+		
 		
 		/** as the identity is provided of a particular type, the result is not an Optional but the type of identity **/
-//		String reducedString = ss.reduce(new String("accumulator to start with"), (accumulator, element) -> accumulator + " , " + element);
+		String reducedString2 = ss.reduce(new String("accumulator to start with"), 
+				
+				                        (accumulator, element) -> accumulator + " , " + element );
 		
 //		System.out.println(reducedString);
 		
-		String reducedString = ss.reduce(new String("1st Element"), 
+		String reducedString3 = ss.reduce(new String("1st Element"), 
 				
 				 (accumulator, element) -> accumulator + " ~ " + element,
 				 
@@ -72,7 +87,7 @@ public class Ch4App6RefactoringAndCustomCollectorsPart1 {
 					 
 				 });
 		
-		System.out.println("reduced string : " + reducedString);
+		System.out.println("reduced string : " + reducedString3);
 
 	    
 		

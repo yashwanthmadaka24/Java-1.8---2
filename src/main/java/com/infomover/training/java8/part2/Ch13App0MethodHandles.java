@@ -14,9 +14,9 @@ public class Ch13App0MethodHandles {
 
 		MethodHandle methodHandle = lookup.findStatic(Counter.class, "count", methodType);
 
-		// int count = (int) methodHandle.invokeExact("Muhammed Shakir");
+		 int count = (int) methodHandle.invokeExact("Muhammed Shakir");
 		//
-		// System.out.println("Count : " + count);
+		 System.out.println("Count : " + count);
 
 		// Following illustrates the difference between invokeExact and invoke
 		// which is, invokeExact will not do auto-type conversion where as

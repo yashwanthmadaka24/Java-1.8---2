@@ -12,16 +12,20 @@ public class Ch4App0MethodReferences {
 
 		// static method reference : ContainingClass::methodName
 		
+		BiConsumer<ClassA, String> staticReference0 =  (x, y) -> System.out.println(x + y);
+		
 		BiConsumer<ClassA, String> staticReference = ClassA::add;
 		staticReference.accept(new ClassA("static method reference"), "add");
 		
 		// Reference to instance method of a particular object : containingObject::methodName
 		
 		ClassA a = new ClassA("instance method reference");
+		
 		BiConsumer<ClassA, String> methodReference = a::subtract0;
 		methodReference.accept(a, "subtract0");
 		
 		// Reference to an instance method of an arbitrary object of particular type;
+		
 		BiConsumer<ClassA, String> arbitraryObjectReference = ClassA::subtract;
 		arbitraryObjectReference.accept(new ClassA("arbitrary object method reference"), "subtract");
 
@@ -29,9 +33,14 @@ public class Ch4App0MethodReferences {
 		BiConsumer<ClassA, String> arbitraryObjectReference2 = (x, y) -> x.subtract(y);
 		arbitraryObjectReference2.accept(new ClassA("no method reference"), "subtract");
 		
+		
+		
+		
 		// Reference to the constructor
 		
+		
 		Supplier<ClassA> f1 = ClassA::new;
+		
 		
 		Function<String, ClassA> f2 = ClassA::new;
 		
@@ -81,3 +90,12 @@ class ClassA {
 	}
 
 }
+
+
+
+
+
+
+
+
+

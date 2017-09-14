@@ -74,10 +74,28 @@ public class Ch2App5RefactoringLegacyCode {
 		
 		Set<String> dependentNames = allEmployeesList.stream()
 			.flatMap(employee -> employee.getDependents())
-			.filter(x -> x.getAge() > 15)
+			.filter(x -> x.getAge() >= 15)
 			.map(x -> x.getName())
 			.collect(Collectors.toSet());
 
+		Set<String> dependentNames2 = allEmployeesList.stream()
+				.flatMap(employee -> {
+				
+					System.out.println("in flatMap");
+					return employee.getDependents();
+				})
+				.filter(x -> {
+					
+					System.out.println("in filter");
+					return x.getAge() >= 15;
+				})
+				.map(x -> x.getName())
+				.collect(Collectors.toSet());
+
+		
+		
+		
+		
 		System.out.println("Finally : " + dependentNames);
 		
 		
@@ -121,19 +139,15 @@ public class Ch2App5RefactoringLegacyCode {
 						.collect(Collectors.toList());
 		
 		
+		List<Employee> allEmpsWithComprePlans2 = 
+				allEmps.stream()
+					.filter(x -> 
+								x.getHealthPlans()
+									.anyMatch(plan -> plan.getName().startsWith("Compre")))
+					.collect(Collectors.toList());
+		
 		System.out.println(allEmpsWithComprePlans);
 						
-						
-						
-						
-				
-		
-				 				
-		
-		
-		
-	
-		
-		
+			
 	}
 }

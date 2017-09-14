@@ -13,11 +13,13 @@ public class Ch8App1LongAccumulator {
 
 		ExecutorService executorService = Executors.newFixedThreadPool(8);
 		LongBinaryOperator sum = Long::sum;
+		// sum = (x, y) -> x + y;
 		LongAccumulator accumulator = new LongAccumulator(sum, 0L);
 		int numberOfThreads = 4;
 		int numberOfIncrements = 100;
 
 		// when
+		// IntStream.rangeClosed : startInclusive & endInclusive
 		Runnable accumulateAction = () -> 
 				IntStream.rangeClosed(0, numberOfIncrements)
 				.forEach(accumulator::accumulate);

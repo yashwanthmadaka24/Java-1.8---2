@@ -21,10 +21,10 @@ public class Ch7App1FolkJoinPoolRecursiveActionWithCount {
 		// ForkJoinPool.getCommonPoolParallelism() + " -- "
 		// + fjp.getActiveThreadCount());
 
-		//Stream<String> stream = Files.lines(Paths.get(
-		//		"//Users//MuhammedShakir//poc-projects//core-java//corejava//src//main//java//com//mslc//learning//concurrency//java7//forkjoinpool//data.txt"));
+		// Stream<String> stream = Files.lines(Paths.get(
+		// "//Users//MuhammedShakir//poc-projects//core-java//corejava//src//main//java//com//mslc//learning//concurrency//java7//forkjoinpool//data.txt"));
 
-		//String theString = stream.collect(Collectors.joining());
+		// String theString = stream.collect(Collectors.joining());
 
 		MyRecursiveAction task = new MyRecursiveAction(
 				"Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).Amazon Prime Day is almost here, and if you’re serious about finding the best deals, admittedly you’ll probably refrain from shopping this weekend and see what Amazon has to offer (like big discounts on its own devices).");
@@ -65,15 +65,16 @@ class MyRecursiveAction extends RecursiveAction {
 			tasks.add(new MyRecursiveAction(s1));
 			tasks.add(new MyRecursiveAction(s2));
 			ForkJoinTask.invokeAll(tasks);
-			
-			
+
 		} else {
 			String value = theString.toUpperCase();
-			//synchronized (MyRecursiveAction.class) {
+			synchronized (MyRecursiveAction.class) {
+
 				count++;
-				System.out.println(value.replace(" ", "-") + "  -> " + Thread.currentThread().getName() + " -- Count : "
-						+ count);
-		    //}
+
+				System.out.println(
+						value.replace(" ", "-") + "  -> " + Thread.currentThread().getName() + " -- Count : " + count);
+			}
 
 		}
 

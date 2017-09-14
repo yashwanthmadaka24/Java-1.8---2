@@ -26,8 +26,6 @@ public class Ch2App4PuttingOperationsToGether {
 						.filter(x -> x.getName().startsWith("Compre"))
 						.map(x -> x.getState())
 						.collect(Collectors.toSet());
-
-				
 				
 				List<HealthPlan> healthPlans = HealthData.getThreeHealthPlans();
 				
