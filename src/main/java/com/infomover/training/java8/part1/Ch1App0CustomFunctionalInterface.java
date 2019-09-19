@@ -8,7 +8,8 @@ public class Ch1App0CustomFunctionalInterface {
 			public int add(int value) {
 				return value + 10;
 			}
-		};
+		};//
+		
 		int value = execute(adder);
 		System.out.println(value);
 		value = execute(x -> x + 100);
