@@ -100,6 +100,8 @@ public final class Employee {
 	 * Used in imperative code examples that need to iterate over a list
 	 */
 	public List<Dependent> getDependentList() {
+		
+		
 		return unmodifiableList(dependents);
 	}
 

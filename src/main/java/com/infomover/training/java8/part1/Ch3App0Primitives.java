@@ -3,6 +3,7 @@ package com.infomover.training.java8.part1;
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.function.IntUnaryOperator;
 import java.util.function.LongFunction;
 import java.util.function.ToLongFunction;
 import java.util.stream.DoubleStream;
@@ -16,7 +17,10 @@ public class Ch3App0Primitives {
 	
 	public static void main(String[] args) {
 		
-		// 2nd argument is IntUnaryOperator 
+		
+		// 2nd argument is IntUnaryOperator
+		
+		IntUnaryOperator o = x -> x + 1;
 		IntStream iStream= IntStream.iterate(0, (x -> x + 1));
 		iStream.limit(50).forEach(System.out::println);
 		
@@ -25,13 +29,14 @@ public class Ch3App0Primitives {
 		
 
 		// int takes 4 bytes whereas Integer takes 16 bytes.
-		// Boxing / Autoboxing is expensive & Unboxing is expensive - in the
+		// Boxing / Autoboxing & Unboxing is expensive - in the
 		// .class file there is
 		// nothing like auto boxing .. it is about creating the objects.
 
 		// Streams for primitive is available - long, int & double.
 
 		ToLongFunction<String> toLong = x -> x.length();
+		
 		toLong.applyAsLong("Some String");
 
 		LongFunction<String> toString = x -> String.valueOf(x);
@@ -59,6 +64,8 @@ public class Ch3App0Primitives {
 
 		// Get the statistics of age of all Dependents of all Employees
 
+		// Likewise you have LongSummaryStatistic and also DoubleSummaryStatistics
+		
 		IntSummaryStatistics statistics = 
 					HealthData.employeeList
 						.stream()

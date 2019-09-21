@@ -17,8 +17,6 @@ public class Ch4App6RefactoringAndCustomCollectorsPart1 {
 		
 		List<Employee> emps = HealthData.employeeList;
 		
-		
-		
 		StringBuilder builder = new StringBuilder("[");
 		
 		for (Employee emp : emps) {
@@ -63,6 +61,7 @@ public class Ch4App6RefactoringAndCustomCollectorsPart1 {
 		**/
 		
 		Stream<String> ss = Stream.of("string-1", "string-2", "string-3", "string-4", "string-5", "string-6", "string-7");
+		
 		
 		
 		Optional<String> reducedString = 

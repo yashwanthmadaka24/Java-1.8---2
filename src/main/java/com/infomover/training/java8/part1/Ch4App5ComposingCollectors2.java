@@ -43,7 +43,7 @@ public class Ch4App5ComposingCollectors2 {
 		
 		
 		Map<HealthPlan, Long> healthPlanEmps0 = 
-				emps1
+				HealthData.employeeList.stream()
 				  .collect(groupingBy(emp -> emp.getPrimaryHealthPlan(), Collectors.counting()));
 
 		healthPlanEmps0.forEach((key, value) -> System.out.println(key + " -- " + value));
@@ -59,10 +59,11 @@ public class Ch4App5ComposingCollectors2 {
 		
 		healthPlanEmps.forEach((key, value) -> System.out.println(key + " -- " + value));
 		
-		// Following is to get the Set of Last Names grouped by Health Plan
 		
 		/**
-		 * The naive way of doing this will be as follows
+		 * Following is to get the Set of Last Names grouped by Health Plan
+		 * 
+		 * First take a look at the naive way of doing this will be as follows
 		 * 
 		 */
 		
@@ -98,24 +99,23 @@ public class Ch4App5ComposingCollectors2 {
 		
 
 		// Use the following to do it in a nicer and neater way
+		
 		Stream<Employee> emps5 = HealthData.employeeList.stream();
 		
 		Map<HealthPlan, Set<String>> groupedEmps2 = 
 				emps5
-				  .collect(groupingBy(
+				  .collect(Collectors.groupingBy(
 						    // The key to groupBy
 						  	Employee::getPrimaryHealthPlan,
 						  	// cascaded operation with a mapper 
-						  	mapping(Employee::getLastName,
+						  	Collectors.mapping(Employee::getLastName,
 						  			// to convert the value to what ever type of Collection
 						  			// this is a downstream collector - Collectors.toSet()
-						  			toSet())   ));
+						  			Collectors.toSet())   ));
 		
 		groupedEmps2.forEach((key, value) -> System.out.println(key + " -- " + value));
 		
 		//Collectors.groupingBy(classifier, downstream)
-		
-		
 		
 	}
 }

@@ -4,18 +4,20 @@ public class Ch3App2DefaultsAndSubclassing {
 
 	/**
 	 * Put simply: class wins. The motivation for this decision is that default
-	 * methods are designed primarily to allow binary compatible API evolution. 
- 
-	 * <p> 
+	 * methods are designed primarily to allow binary compatible API evolution.
+	 * 
+	 * <p>
 	 * Suppose we had a custom list implementation called MyCustomList and had
 	 * implemented a custom addAll method, and the new List interface provided a
-	 * default addAll that delegated to the add method. If the default method
-	 * wasn’t guaranteed to be overridden by this addAll method, we could break
-	 * the existing implementation.
+	 * default addAll that delegated to the add method. If the default method wasn’t
+	 * guaranteed to be overridden by this addAll method, we could break the
+	 * existing implementation.
 	 * </p>
 	 * 
 	 * 
 	 * @param args
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 */
 	public static void main(String[] args) {
 
@@ -43,7 +45,7 @@ interface ParentApp {
 	public void message(String body);
 
 	public default void welcome() {
-		message("ParentApp : Hi!");
+		message("ParentApp Interface Default : Hi!");
 	}
 
 	public String getLastMessage();
@@ -83,6 +85,7 @@ class ParentAppImpl implements ParentApp {
  */
 class ChildAppImpl extends ParentAppImpl implements ChildApp {
 
+
 }
 
 class OverridingParentAppImpl extends ParentAppImpl {
@@ -97,4 +100,5 @@ class OverridingParentAppImpl extends ParentAppImpl {
 
 class OverridingChildIImpl extends OverridingParentAppImpl implements ChildApp {
 
+	
 }

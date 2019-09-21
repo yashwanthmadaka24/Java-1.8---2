@@ -15,7 +15,7 @@ public class Ch4App2Paritioning {
 	 * Partition by employee that has dependents and those 
 	 * that does not have dependents.
 	 * 
-	 *  Get a Map<Boolean, List<Employee>>; 
+	 *  Get a Map<Boolean, List<Employee>>; z
 	 *  false = [List of employees with no dependents]
 	 *  true = [List of employees that has dependents]
 	 * 
@@ -32,10 +32,6 @@ public class Ch4App2Paritioning {
 				.collect(partitioningBy(emp -> emp.hasDependents()));
 		
 		empsWithDependents.forEach((key, value) -> System.out.println(key + " -- " + value));
-		
-		
-		
-	
 		
 		
 	}

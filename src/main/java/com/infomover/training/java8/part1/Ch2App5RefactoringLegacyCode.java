@@ -1,5 +1,7 @@
 package com.infomover.training.java8.part1;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +15,11 @@ public class Ch2App5RefactoringLegacyCode {
 
 	
 	public static void main(String[] args) {
+		
+		
+		
+		// @formatter:off
+
 
 		// Find all the dependents in the system where the age is greater than
 		// 15 and put their names (just the name) into a Set. In other words
@@ -21,8 +28,8 @@ public class Ch2App5RefactoringLegacyCode {
 
 
 		List<Employee> allEmployeesList = HealthData.employeeList; 
-				
 		
+		// following is no-stream code to get all employees whose dependents are aged more than 15 
 		Set<String> greaterThan15 = new HashSet<>();
 		// stream through 
 		for (Employee  emp : allEmployeesList) {
@@ -73,6 +80,7 @@ public class Ch2App5RefactoringLegacyCode {
 		System.out.println(greaterThan15);
 		
 		Set<String> dependentNames = allEmployeesList.stream()
+			// following flatMap returns stream of dependents [flatMap always returns a stream and also takes a mapper that provides stream]
 			.flatMap(employee -> employee.getDependents())
 			.filter(x -> x.getAge() >= 15)
 			.map(x -> x.getName())
@@ -81,7 +89,7 @@ public class Ch2App5RefactoringLegacyCode {
 		Set<String> dependentNames2 = allEmployeesList.stream()
 				.flatMap(employee -> {
 				
-					System.out.println("in flatMap");
+					System.out.println("in flatMap of " + employee.getName() + " -- " + employee.getDependentList().size());
 					return employee.getDependents();
 				})
 				.filter(x -> {
@@ -91,11 +99,6 @@ public class Ch2App5RefactoringLegacyCode {
 				})
 				.map(x -> x.getName())
 				.collect(Collectors.toSet());
-
-		
-		
-		
-		
 		System.out.println("Finally : " + dependentNames);
 		
 		
@@ -130,6 +133,17 @@ public class Ch2App5RefactoringLegacyCode {
 		 * }
 		 * 
 		 */
+		
+		List<Employee> allWithComprePlans = 
+				  allEmployeesList
+				   .stream()
+				   .filter(x -> {
+					   return x.getHealthPlans()
+					    .filter(y -> y.getName().contains("compre"))
+					    .count() > 0;
+				   }).collect(Collectors.toList());
+		
+				
 		List<Employee> allEmpsWithComprePlans = 
 					allEmps.stream()
 						.filter(x -> 
@@ -147,7 +161,9 @@ public class Ch2App5RefactoringLegacyCode {
 					.collect(Collectors.toList());
 		
 		System.out.println(allEmpsWithComprePlans);
-						
+		 
+		// @formatter:on
+		
 			
 	}
 }
