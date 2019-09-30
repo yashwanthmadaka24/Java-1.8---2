@@ -21,6 +21,13 @@ public class StringCombiner {
 			
 			this.builder.append(delim);
 		}
+//		System.out.println("checking");
+//		try {
+//			Thread.sleep(100);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		this.builder.append(word);
 
 		return this;
@@ -30,6 +37,10 @@ public class StringCombiner {
 	// BEGIN merge
 	public StringCombiner merge(StringCombiner other) {
 
+		
+		
+		
+//		System.out.println("combiner");
 		if (!other.equals(this)) {
 			
 			if (!other.areAtStart() && !this.areAtStart()) {

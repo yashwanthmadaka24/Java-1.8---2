@@ -1,11 +1,9 @@
 package com.infomover.training.java8.part1;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.IntStream;
 
 public class Ch4App0MethodReferences {
 
@@ -15,12 +13,20 @@ public class Ch4App0MethodReferences {
 
 		BiConsumer<ClassA, String> staticReference0 = (x, y) -> System.out
 				.println(x.getClass().getName() + " -- " + y.getClass().getName());
+		
+		
 		staticReference0.accept(new ClassA(), "2");
 
 //		IntStream.of(1, 2, 3).forEach(System.out::println);
 
 		BiConsumer<ClassA, String> staticReference = ClassA::add;
 		staticReference.accept(new ClassA("static method reference"), "add");
+		
+		BiConsumer<Integer, String> staticReference1 = ClassA::add0;
+		staticReference1.accept(2, "add");
+		
+		
+		
 
 		// Reference to instance method of a particular object :
 		// containingObject::methodName
@@ -46,9 +52,18 @@ public class Ch4App0MethodReferences {
 
 		Function<String, ClassA> f2 = ClassA::new;
 		ClassA aNew = f2.apply("Constructor 2");
+		
+		MyFunctionalInterfaceToTest<String, Integer, ClassA> f3 = ClassA::new;
+		
+		BiFunction<String, Integer, ClassA> f4 = ClassA::new;
+		
 
 	}
 
+}
+interface MyFunctionalInterfaceToTest<T, U, R> {
+	
+	R testing(T s, U i);
 }
 
 class ClassA {
@@ -63,6 +78,12 @@ class ClassA {
 //		System.out.println("Constructor 2");
 		this.id = id;
 	}
+	
+	ClassA(String id, Integer i) {
+//		System.out.println("Constructor 2");
+		this.id = id;
+	}
+	
 
 	@Override
 	public String toString() {
@@ -76,6 +97,14 @@ class ClassA {
 
 		// return a;
 	}
+	
+	public static void add0(Integer a, String word) {
+
+		System.out.println("in add : " + word + " -- " + a);
+
+		// return a;
+	}
+	
 
 	public ClassA subtract0(ClassA a, String word) {
 

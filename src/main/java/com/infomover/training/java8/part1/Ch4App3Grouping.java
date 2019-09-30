@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.groupingBy;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.infomover.training.java8.model.Employee;
@@ -25,6 +26,7 @@ public class Ch4App3Grouping {
 		Map<HealthPlan, List<Employee>> groupedEmps = 
 				emps
 				  .collect(groupingBy(emp -> emp.getPrimaryHealthPlan()));
+		
 		
 		
 		

@@ -8,9 +8,14 @@ import com.infomover.training.java8.model.HealthData;
 
 public class Ch4App6RefactoringAndCustomCollectorsPart3 {
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		List<Employee> emps = HealthData.employeeList;
+		
 
 		StringCombiner combined = emps
 									.stream()
@@ -19,6 +24,7 @@ public class Ch4App6RefactoringAndCustomCollectorsPart3 {
 												StringCombiner::add, 
 												StringCombiner::merge);
 		String result = combined.toString();
+		
 
 		System.out.println(result);
 	}

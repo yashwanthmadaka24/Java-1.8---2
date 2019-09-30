@@ -30,6 +30,16 @@ public class MyStringCollector implements Collector<String, StringCombiner, Stri
 	@Override
 	public Supplier<StringCombiner> supplier() {
 
+//		return new Supplier<StringCombiner>() {
+//
+//			@Override
+//			public StringCombiner get() {
+//				
+//				return new StringCombiner(delim, prefix, suffix);
+//			}
+//			
+//		};
+		
 		return () -> new StringCombiner(delim, prefix, suffix);
 
 	}
@@ -51,6 +61,7 @@ public class MyStringCollector implements Collector<String, StringCombiner, Stri
 	@Override
 	public BinaryOperator<StringCombiner> combiner() {
 
+//		System.out.println("combiner");
 		// Following is just to demonstrate the use of method reference of
 		// "arbitrary object type"
 

@@ -5,9 +5,15 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
+import java.nio.channels.SelectableChannel;
 import java.util.Date;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Ch9App9AsyncEchoServer {
 	private AsynchronousServerSocketChannel serverChannel;
@@ -16,6 +22,7 @@ public class Ch9App9AsyncEchoServer {
 
 	public Ch9App9AsyncEchoServer() {
 		try {
+
 			serverChannel = AsynchronousServerSocketChannel.open();
 			InetSocketAddress hostAddress = new InetSocketAddress("localhost", 4999);
 			serverChannel.bind(hostAddress);
@@ -44,7 +51,7 @@ public class Ch9App9AsyncEchoServer {
 					if (message.equals("bye")) {
 						break; // while loop
 					}
-					message = ">> Response from server :" + message +  " at : " + new Date() +  "\n";
+					message = ">> Response from server :" + message + " at : " + new Date() + "\n";
 					buffer = ByteBuffer.wrap(new String(message).getBytes());
 					Future<Integer> writeResult = clientChannel.write(buffer);
 

@@ -17,8 +17,9 @@ public class Ch4App6RefactoringAndCustomCollectorsPart4 {
 	public static void main(String[] args) {
 
 		List<Employee> emps = HealthData.employeeList;
-
+		
 		String result = emps
+//						.stream()
 						.parallelStream()
 						.map(Employee::getName)
 						.collect(new MyStringCollector(",","[", "]"));

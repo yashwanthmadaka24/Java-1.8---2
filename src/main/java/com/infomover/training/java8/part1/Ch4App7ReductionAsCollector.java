@@ -37,6 +37,7 @@ public class Ch4App7ReductionAsCollector {
 		List<Employee> emps = HealthData.employeeList;
 
 		// but will not work with parallelStream
+		
 		String result = emps
 						.stream()
 						.map(Employee::getName)

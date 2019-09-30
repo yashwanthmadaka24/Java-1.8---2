@@ -25,12 +25,12 @@ public class HealthData {
 
     public static final Employee johnColtrane = new Employee("John Coltrane",  asList(dentalPlan, comprehensiveHealthPlan), asList( new Dependent("Sarah", 16), new Dependent("Richard", 12)), 45);
 
-    public static final Employee johnLennon = new Employee("John Lennon", asList(maturityPlan, oldAgePlan),asList(new Dependent("Mike", 14), new Dependent("Nancy", 12), new Dependent("Shakira", 5)), 35) ;
+    public static final Employee johnLennon = new Employee("John Lennon", asList(maturityPlan),asList(new Dependent("Mike", 14), new Dependent("Nancy", 12), new Dependent("Shakira", 5)), 35) ;
 
     // Sarah Corner does not have any dependents
-    public static final Employee sarahCorner2 = new Employee("Sarah Corner2", asList(maturityPlan, dentalPlan, oldAgePlan),  Collections.emptyList(), 35) ;
+    public static final Employee sarahCorner2 = new Employee("Sarah Corner2", asList(oldAgePlan),  Collections.emptyList(), 35) ;
 
-    public static final Employee sarahCorner = new Employee("Sarah Corner", asList(maturityPlan, dentalPlan, oldAgePlan),  Collections.emptyList(), 35) ;
+    public static final Employee sarahCorner = new Employee("Sarah Corner", asList(dentalPlan, oldAgePlan),  Collections.emptyList(), 35) ;
     
     
     public static final Employee sarahCorner3 = new Employee("Sarah Corner3", asList(maturityPlan, maternityPlan, dentalPlan, oldAgePlan),  Collections.emptyList(), 35) ;

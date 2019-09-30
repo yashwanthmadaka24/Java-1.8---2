@@ -48,6 +48,7 @@ public class Ch6App4MultipleFuturesInParallel {
 		// the Stream.map() method.
 
 		String combined = Stream.of(future1, future2, future3)
+				.parallel()
 				.map(CompletableFuture::join)
 				.collect(Collectors.joining(" "));
 

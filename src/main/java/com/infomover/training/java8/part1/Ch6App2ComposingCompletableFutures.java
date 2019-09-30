@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 
 public class Ch6App2ComposingCompletableFutures {
 
+	
 
 	/** Explaination : 
 	 *  thenCompose function executes the CFs sequentially because cf2 may be dependent on the results of cf1.

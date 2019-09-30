@@ -39,10 +39,14 @@ public class Ch2App1StreamOperationsMaxAndMin {
 		
 		
 		Comparator<Employee> c = Comparator.comparing(x -> x.getDependentList().size());
+		
+		
 		Comparator<Employee> c2 = Comparator.comparing(x -> x.getDependentList(), (l1, l2) -> {
 			
 			return l1.size() - l2.size();
 		});
+		
+		
 		Comparator<Employee> c3 = Comparator.comparing(Employee::getDependentList, (l1, l2) -> {
 			System.out.println(l1.size() + " -- " + l2.size()  + " -- " );
 			return l1.size() - l2.size();

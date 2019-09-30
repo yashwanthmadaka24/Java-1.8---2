@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -26,7 +27,8 @@ public class Ch4App6RefactoringAndCustomCollectorsPart2 {
 		 * over a variety of data sources, including even non-thread-safe
 		 * collections such as ArrayList. This is possible only if we can
 		 * prevent interference with the data source during the execution of a
-		 * stream pipeline. Except for the escape-hatch operations iterator()
+		 * stream pipeline. Except for the escape-hatch (https://stackoverflow.com/questions/42524688/what-is-an-escape-hatch-operation-in-a-java-stream) 
+		 *  operations iterator()
 		 * and spliterator(), execution begins when the terminal operation is
 		 * invoked, and ends when the terminal operation completes. For most
 		 * data sources, preventing interference means ensuring that the data
@@ -72,8 +74,8 @@ public class Ch4App6RefactoringAndCustomCollectorsPart2 {
 		Set<Integer> seen = Collections.synchronizedSet(new HashSet<>());
 
 		Stream<Integer> stream = Stream.of(1, 4, 3, 1, 1, 3, 2, 5, 5, 7, 8);
-		Stream<Integer> added = stream.map(e -> {
-			// System.out.println(Thread.currentThread().getName());
+		Stream<Integer> added = stream.parallel().map(e -> {
+//			System.out.println(Thread.currentThread().getName());
 			if (seen.add(e))
 				return 0;
 			else
@@ -82,7 +84,24 @@ public class Ch4App6RefactoringAndCustomCollectorsPart2 {
 		added.forEach(System.out::print);
 		System.out.println(" **** ");
 
-		int[] arr = IntStream.range(0, 5).parallel().map(x -> x * 2).toArray();
+		// @formatter:off
+
+		int[] arr = IntStream
+						.range(0, 5)
+						.parallel()
+						.map(x -> {
+							try {
+								Thread.sleep(new Random().nextInt(100));
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							return x * 2;
+							
+						})
+						.toArray();
+		 
+		// @formatter:on
 
 		System.out.println(arr[0] + " " + arr[1] + " " + arr[2] + " " + arr[3] + " " + arr[4]);
 
@@ -126,7 +145,7 @@ public class Ch4App6RefactoringAndCustomCollectorsPart2 {
 
 		System.out.println("reducedString 2 : "+ reducedString2);
 		
-		// 3 arguments reduce - only when you want to change (map kind of feature)
+		// 3 arguments reduce - only when you want to change the return type i.e. U
 		allStrings = Stream.of("1", "2", "3", "4", "5");
 		StringBuilder reducedString3 = allStrings
 										.reduce(new StringBuilder(), (acc, element) -> {
@@ -137,8 +156,9 @@ public class Ch4App6RefactoringAndCustomCollectorsPart2 {
 											return acc;
 											
 										}, (left, right) -> {
-											
-											return new StringBuilder();
+											System.out.println(" ------ executing combiner (only when parallel stream) -----");
+											return left.append(right);
+											//return new StringBuilder();
 										});
 		reducedString3.insert(0, "[").append("]");
 	    System.out.println("reducedString3 : " + reducedString3);
@@ -147,6 +167,7 @@ public class Ch4App6RefactoringAndCustomCollectorsPart2 {
 
 		 StringBuilder reduced =
 				 emps.stream()
+				 .parallel()
 				 .map( Employee:: getName)
 				 .reduce( new StringBuilder(),
 						 (accumulatorBuilder, theName) -> {
@@ -161,11 +182,13 @@ public class Ch4App6RefactoringAndCustomCollectorsPart2 {
 							 },
 						(left, right) -> {
 							
-							return left.append(right);
+							return left;
+							//return left.append(right);
 				 });
 				
 		 reduced.insert( 0, "["); reduced.append("]");
 		 String result = reduced.toString();
+		 System.out.println(" ------- ");
 		 System.out.println(result);
 
 	}

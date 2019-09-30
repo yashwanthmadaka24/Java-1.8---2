@@ -1,12 +1,21 @@
 package com.infomover.training.java8.part1;
 
-import java.io.*;
-import java.nio.*;
-import java.nio.channels.*;
-import java.nio.channels.spi.*;
-import java.nio.charset.*;
-import java.net.*;
-import java.util.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.channels.SelectableChannel;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.nio.channels.spi.SelectorProvider;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.util.Iterator;
+import java.util.Set;
 
 public class Ch9App8NonBlockingServer {
 
@@ -29,8 +38,9 @@ public class Ch9App8NonBlockingServer {
 		this.port = port;
 	}
 
-	public void initialize() throws IOException {
+	public void initialize()
 
+			throws IOException {
 		this.selector = SelectorProvider.provider().openSelector();
 		this.selectableChannel = ServerSocketChannel.open();
 		this.selectableChannel.configureBlocking(false);
@@ -39,7 +49,9 @@ public class Ch9App8NonBlockingServer {
 		this.selectableChannel.socket().bind(isa);
 	}
 
-	public void finalize() throws IOException {
+	public void finalize()
+
+			throws IOException {
 		this.selectableChannel.close();
 		this.selector.close();
 	}

@@ -1,7 +1,5 @@
 package com.infomover.training.java8.part1;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +13,45 @@ public class Ch2App5RefactoringLegacyCode {
 
 	
 	public static void main(String[] args) {
+		
+		// @formatter:off
+
+		List<Employee> emps = HealthData
+				.employeeList
+				.stream()
+				.filter(x -> 
+					
+			 		 x.getHealthPlans()
+					  .filter(y -> y.getName().contains("Compre"))
+					  .count() > 0
+				).collect(Collectors.toList());
+		
+		System.out.println(emps);
+		
+		List<Employee> emps2 = HealthData
+				.employeeList
+				.stream()
+				.filter(x -> x.getHealthPlans().anyMatch(y -> y.getName().contains("Compre")))
+				.collect(Collectors.toList());
+		
+		
+		System.out.println(emps2);
+		
+		
+				 
+		// @formatter:on
+		
+		
+		
+		if (true) {
+			return;
+		}
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -134,6 +171,7 @@ public class Ch2App5RefactoringLegacyCode {
 		 * 
 		 */
 		
+		// All Employees which has a Comprehensive HealthPlan
 		List<Employee> allWithComprePlans = 
 				  allEmployeesList
 				   .stream()
@@ -143,7 +181,7 @@ public class Ch2App5RefactoringLegacyCode {
 					    .count() > 0;
 				   }).collect(Collectors.toList());
 		
-				
+		// Same as above
 		List<Employee> allEmpsWithComprePlans = 
 					allEmps.stream()
 						.filter(x -> 
@@ -152,6 +190,8 @@ public class Ch2App5RefactoringLegacyCode {
 										.count() > 0)
 						.collect(Collectors.toList());
 		
+		
+		// Using anymatch
 		
 		List<Employee> allEmpsWithComprePlans2 = 
 				allEmps.stream()
