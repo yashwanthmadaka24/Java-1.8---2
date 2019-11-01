@@ -5,8 +5,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import com.infomover.training.java8.model.Employee;
-import com.infomover.training.java8.model.HealthData;
+import com.mslc.training.java8.model.Employee;
+import com.mslc.training.java8.model.HealthData;
 
 public class MethodReferenceDemo {
 	
