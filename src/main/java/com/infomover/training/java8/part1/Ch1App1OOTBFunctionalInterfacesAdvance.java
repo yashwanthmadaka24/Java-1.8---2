@@ -18,26 +18,7 @@ public class Ch1App1OOTBFunctionalInterfacesAdvance {
 		
 		System.out.println(" **** ");
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
+	
 		System.out.println(adderBy1.apply(5));
 		// following will print 9. It will first executed the composed function and then
 		// the original one
