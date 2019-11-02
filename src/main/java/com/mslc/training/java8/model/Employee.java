@@ -21,7 +21,7 @@ public final class Employee {
 
 	private String name;
 	private String lastName;
-	private List<HealthPlan> healthPlans;
+	private List<HealthPlanGenericImpl> healthPlans;
 	private List<Dependent> dependents;
 	private int age;
 
@@ -44,7 +44,7 @@ public final class Employee {
 		return this.lastName;
 	}
 
-	public Employee(String name, List<HealthPlan> healthPlans, List<Dependent> dependents, int age) {
+	public Employee(String name, List<HealthPlanGenericImpl> healthPlans, List<Dependent> dependents, int age) {
 		Objects.requireNonNull(name);
 		Objects.requireNonNull(healthPlans);
 		Objects.requireNonNull(dependents);
@@ -66,14 +66,14 @@ public final class Employee {
 	/**
 	 * @return the healthPlans
 	 */
-	public Stream<HealthPlan> getHealthPlans() {
+	public Stream<HealthPlanGenericImpl> getHealthPlans() {
 		return healthPlans.stream();
 	}
 
 	/**
 	 * Used in imperative code examples that need to iterate over a list
 	 */
-	public List<HealthPlan> getHealthPlanList() {
+	public List<HealthPlanGenericImpl> getHealthPlanList() {
 
 		return unmodifiableList(healthPlans);
 
@@ -105,7 +105,7 @@ public final class Employee {
 		return unmodifiableList(dependents);
 	}
 
-	public HealthPlan getPrimaryHealthPlan() {
+	public HealthPlanGenericImpl getPrimaryHealthPlan() {
 		return healthPlans.get(0);
 	}
 
@@ -118,7 +118,7 @@ public final class Employee {
 
 	public Employee copy() {
 
-		List<HealthPlan> healthPlans = getHealthPlans().map(HealthPlan::copy).collect(toList());
+		List<HealthPlanGenericImpl> healthPlans = getHealthPlans().map(HealthPlanGenericImpl::copy).collect(toList());
 
 		List<Dependent> dependents = getDependents().map(Dependent::copy).collect(toList());
 

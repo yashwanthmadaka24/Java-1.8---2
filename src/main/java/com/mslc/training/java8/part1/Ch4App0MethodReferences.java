@@ -1,5 +1,6 @@
 package com.mslc.training.java8.part1;
 
+import java.util.Comparator;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -13,20 +14,14 @@ public class Ch4App0MethodReferences {
 
 		BiConsumer<ClassA, String> staticReference0 = (x, y) -> System.out
 				.println(x.getClass().getName() + " -- " + y.getClass().getName());
-		
-		
-		staticReference0.accept(new ClassA(), "2");
 
-//		IntStream.of(1, 2, 3).forEach(System.out::println);
+		staticReference0.accept(new ClassA(), "2");
 
 		BiConsumer<ClassA, String> staticReference = ClassA::add;
 		staticReference.accept(new ClassA("static method reference"), "add");
-		
+
 		BiConsumer<Integer, String> staticReference1 = ClassA::add0;
 		staticReference1.accept(2, "add");
-		
-		
-		
 
 		// Reference to instance method of a particular object :
 		// containingObject::methodName
@@ -41,9 +36,19 @@ public class Ch4App0MethodReferences {
 		BiConsumer<ClassA, String> arbitraryObjectReference = ClassA::subtract;
 		arbitraryObjectReference.accept(new ClassA("arbitrary object method reference"), "subtract");
 
+		BiConsumer<HealthInsuranceService, String> arbitraryObjectReference2 = HealthInsuranceService::deactivateInsurance;
+		arbitraryObjectReference2.accept(new HealthInsuranceService("Arbitrary Object"), "deactivateInsurance");
+
 		// similar in functionality but without method reference
-		BiConsumer<ClassA, String> arbitraryObjectReference2 = (x, y) -> x.subtract(y);
-		arbitraryObjectReference2.accept(new ClassA("no method reference"), "subtract");
+		BiConsumer<ClassA, String> arbitraryObjectReference3 = (x, y) -> x.subtract(y);
+		arbitraryObjectReference3.accept(new ClassA("no method reference"), "subtract");
+
+		// the following first0 represents pure functionality
+		MyComparator<String> first0 = String::compareToIgnoreCase;
+		System.out.println(first0.cmp("shakir", "shakir1"));
+
+		// the above is as same as the following
+		Comparator<String> stringComparator = (first, second) -> first.compareToIgnoreCase(second);
 
 		// Reference to the constructor
 
@@ -51,18 +56,28 @@ public class Ch4App0MethodReferences {
 		ClassA aNew1 = f1.get();
 
 		Function<String, ClassA> f2 = ClassA::new;
+
+		// constructor 2 gets executed
 		ClassA aNew = f2.apply("Constructor 2");
+
 		
 		MyFunctionalInterfaceToTest<String, Integer, ClassA> f3 = ClassA::new;
 		
+		// f3.testing actually results in executing the constructor
+		ClassA a3 = f3.testing("asdsa", 22);
+		a3.subtract("asdsadasd");
+		
+		
 		BiFunction<String, Integer, ClassA> f4 = ClassA::new;
 		
+		f4.apply("asdd", 22);
 
 	}
 
 }
+
 interface MyFunctionalInterfaceToTest<T, U, R> {
-	
+
 	R testing(T s, U i);
 }
 
@@ -78,12 +93,11 @@ class ClassA {
 //		System.out.println("Constructor 2");
 		this.id = id;
 	}
-	
+
 	ClassA(String id, Integer i) {
 //		System.out.println("Constructor 2");
 		this.id = id;
 	}
-	
 
 	@Override
 	public String toString() {
@@ -97,14 +111,13 @@ class ClassA {
 
 		// return a;
 	}
-	
+
 	public static void add0(Integer a, String word) {
 
 		System.out.println("in add : " + word + " -- " + a);
 
 		// return a;
 	}
-	
 
 	public ClassA subtract0(ClassA a, String word) {
 
@@ -116,7 +129,68 @@ class ClassA {
 	public ClassA subtract(String word) {
 
 		System.out.println("in subtracT : " + word + " -- " + this);
+
 		return this;
+	}
+
+}
+
+class DemoClassA {
+
+	public static Integer test(String value, String value2) {
+		System.out.println("In test : " + value);
+		return value.length();
+	}
+}
+
+@FunctionalInterface
+interface TestInterface {
+
+	void t();
+
+}
+
+interface MyComparator<T> {
+
+	int cmp(T o1, T o2);
+}
+
+class HealthInsuranceService {
+
+	private String id;
+
+	HealthInsuranceService() {
+
+	}
+
+	HealthInsuranceService(String id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+
+		return id;
+	}
+
+	public static HealthInsuranceService addNewInsurance(HealthInsuranceService service, String insuranceName) {
+
+		System.out.println("in addNewInsurance : " + insuranceName + " -- " + service);
+
+		return service;
+	}
+
+	public HealthInsuranceService activateInsurance(HealthInsuranceService service, String insuranceName) {
+
+		System.out.println("in activateInsurance : " + insuranceName + " -- " + service);
+
+		return service;
+	}
+
+	public String deactivateInsurance(String insuranceName) {
+
+		System.out.println("in deactivateInsurance : " + insuranceName + " -- " + this);
+		return "this";
 	}
 
 }

@@ -15,11 +15,11 @@ public class HealthData {
 	public static final HealthBenefit allInclusiveCover = new HealthBenefit("All Inclusive Cover","Inclusive of meds & transportation cost");
 	public static final HealthBenefit accidentCover = new HealthBenefit("Accident Cover", "Full accident cover");
 	
-	public static final HealthPlan dentalPlan = new HealthPlan("Dental Health Plan", asList(fullCover, cover50), "IL");
-    public static final HealthPlan comprehensiveHealthPlan = new HealthPlan("Comprehensive Health Plan",  asList(cover50, allInclusiveCover),  "NY");
-    public static final HealthPlan maturityPlan = new HealthPlan("Maturity Plan", asList(fullCover, cover50, allInclusiveCover, accidentCover),  "NY");
-    public static final HealthPlan maternityPlan = new HealthPlan("Comprehensive Materity Plan",  asList(fullCover), "IL");
-    public static final HealthPlan oldAgePlan = new HealthPlan("Old Age Plan",  asList(accidentCover), "NY");
+	public static final HealthPlanGenericImpl dentalPlan = new HealthPlanGenericImpl("Dental Health Plan", asList(fullCover, cover50), "IL");
+    public static final HealthPlanGenericImpl comprehensiveHealthPlan = new HealthPlanGenericImpl("Comprehensive Health Plan",  asList(cover50, allInclusiveCover),  "NY");
+    public static final HealthPlanGenericImpl maturityPlan = new HealthPlanGenericImpl("Maturity Plan", asList(fullCover, cover50, allInclusiveCover, accidentCover),  "NY");
+    public static final HealthPlanGenericImpl maternityPlan = new HealthPlanGenericImpl("Comprehensive Materity Plan",  asList(fullCover), "IL");
+    public static final HealthPlanGenericImpl oldAgePlan = new HealthPlanGenericImpl("Old Age Plan",  asList(accidentCover), "NY");
     
     
 
@@ -46,14 +46,47 @@ public class HealthData {
 	
 
 
-    public static Stream<HealthPlan> threeHealthPlans() {
+    public static Stream<HealthPlanGenericImpl> threeHealthPlans() {
     	
         return Stream.of(maturityPlan, maternityPlan, oldAgePlan);
     }
 
-    public static List<HealthPlan> getThreeHealthPlans() {
+    public static List<HealthPlanGenericImpl> getThreeHealthPlans() {
     	
         return Arrays.asList(maturityPlan, maternityPlan, oldAgePlan);
     }
+    
+    public static void buildTestRepository() {
+    	
+    }
+    
+    public static boolean buildTestRepositoryExternal() {
+    	System.out.println("building Test Repo from External Source");
+    	return true;
+    }
+    
+    public static void buildTestRepository(Integer limit) {
+    	System.out.println("Building test repository with limit : " + limit);
+    	
+    }
+    
+    public static Integer buildTestRepository(String env) {
+    	System.out.println("Building test repository for given enviroment : " + env);
+    	int numberOfObjectsCreated = 100;
+    	return numberOfObjectsCreated;
+    }
 
+    /**
+     * Can be referred with 2 types of functional interfaces 
+     * 
+     * @param env
+     * @param type
+     * @return
+     */
+    public static Integer buildTestRepository(String env, String type) {
+    	System.out.println("Building test repository for given enviroment : " + env + " of type :" + type);
+    	int numberOfObjectsCreated = 100;
+    	return numberOfObjectsCreated;
+    }
+    
 }

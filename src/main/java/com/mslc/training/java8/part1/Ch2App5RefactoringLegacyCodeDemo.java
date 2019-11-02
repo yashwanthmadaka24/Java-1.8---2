@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import com.mslc.training.java8.model.Employee;
 import com.mslc.training.java8.model.HealthData;
-import com.mslc.training.java8.model.HealthPlan;
+import com.mslc.training.java8.model.HealthPlanGenericImpl;
 
 public class Ch2App5RefactoringLegacyCodeDemo {
 

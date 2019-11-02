@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import com.mslc.training.java8.model.Employee;
 import com.mslc.training.java8.model.HealthData;
-import com.mslc.training.java8.model.HealthPlan;
+import com.mslc.training.java8.model.HealthPlanGenericImpl;
 
 public class Ch4App5ComposingCollectors2 {
 
@@ -34,14 +34,14 @@ public class Ch4App5ComposingCollectors2 {
 		 * 
 		 */
 
-		Map<HealthPlan, Long> healthPlanEmps0 = HealthData.employeeList.stream()
+		Map<HealthPlanGenericImpl, Long> healthPlanEmps0 = HealthData.employeeList.stream()
 				.collect(Collectors.groupingBy(emp -> emp.getPrimaryHealthPlan(), Collectors.counting()));
 
 		healthPlanEmps0.forEach((key, value) -> System.out.println(key + " -- " + value));
 
 		// Using method reference
 
-		Map<HealthPlan, Long> healthPlanEmps = emps1
+		Map<HealthPlanGenericImpl, Long> healthPlanEmps = emps1
 				.collect(groupingBy(Employee::getPrimaryHealthPlan, Collectors.counting()));
 
 		healthPlanEmps.forEach((key, value) -> System.out.println(key + " -- " + value));
@@ -64,11 +64,11 @@ public class Ch4App5ComposingCollectors2 {
 		 */
 		Stream<Employee> emps4 = HealthData.employeeList.stream();
 
-		Map<HealthPlan, List<Employee>> planWiseEmps = emps4.collect(groupingBy(Employee::getPrimaryHealthPlan));
+		Map<HealthPlanGenericImpl, List<Employee>> planWiseEmps = emps4.collect(groupingBy(Employee::getPrimaryHealthPlan));
 
-		Map<HealthPlan, Set<String>> planWiseEmpNames = new HashMap<>();
+		Map<HealthPlanGenericImpl, Set<String>> planWiseEmpNames = new HashMap<>();
 
-		for (Map.Entry<HealthPlan, List<Employee>> entry : planWiseEmps.entrySet()) {
+		for (Map.Entry<HealthPlanGenericImpl, List<Employee>> entry : planWiseEmps.entrySet()) {
 
 			planWiseEmpNames.put(entry.getKey(),
 					entry.getValue().stream().map(emp -> emp.getLastName()).collect(Collectors.toSet()));
@@ -80,7 +80,7 @@ public class Ch4App5ComposingCollectors2 {
 
 		Stream<Employee> emps5 = HealthData.employeeList.stream();
 
-		Map<HealthPlan, Set<String>> groupedEmps2 = emps5.collect(Collectors.groupingBy(
+		Map<HealthPlanGenericImpl, Set<String>> groupedEmps2 = emps5.collect(Collectors.groupingBy(
 				// The key to groupBy
 				Employee::getPrimaryHealthPlan,
 				// cascaded operation with a mapper

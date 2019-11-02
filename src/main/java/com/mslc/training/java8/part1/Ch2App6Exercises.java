@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import com.mslc.training.java8.model.Employee;
 import com.mslc.training.java8.model.HealthBenefit;
 import com.mslc.training.java8.model.HealthData;
-import com.mslc.training.java8.model.HealthPlan;
+import com.mslc.training.java8.model.HealthPlanGenericImpl;
 
 public class Ch2App6Exercises {
 
@@ -33,7 +33,7 @@ public class Ch2App6Exercises {
 		// Change the following external-iteration to internal-iteration
 		
 		int totalBenefits = 0;
-		for (HealthPlan plan : HealthData.getThreeHealthPlans()) {
+		for (HealthPlanGenericImpl plan : HealthData.getThreeHealthPlans()) {
 			Stream<HealthBenefit> benefits = plan.getBenefits();
 			totalBenefits += benefits.count();
 		}
@@ -164,7 +164,7 @@ public class Ch2App6Exercises {
 		
 	}
 	
-	static List<String> getHealthPlanStates(List<HealthPlan> healthPlans) {
+	static List<String> getHealthPlanStates(List<HealthPlanGenericImpl> healthPlans) {
 		
 		List<String> names =  healthPlans.stream()
 			.map(x -> x.getName() +  " - " + x.getState())

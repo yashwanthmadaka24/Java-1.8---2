@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.mslc.training.java8.model.HealthData;
-import com.mslc.training.java8.model.HealthPlan;
+import com.mslc.training.java8.model.HealthPlanGenericImpl;
 
 public class Ch2App4PuttingOperationsToGether {
 	
@@ -27,7 +27,7 @@ public class Ch2App4PuttingOperationsToGether {
 						.map(x -> x.getState())
 						.collect(Collectors.toSet());
 				
-				List<HealthPlan> healthPlans = HealthData.getThreeHealthPlans();
+				List<HealthPlanGenericImpl> healthPlans = HealthData.getThreeHealthPlans();
 				
 				
 				 states =   healthPlans.stream()
