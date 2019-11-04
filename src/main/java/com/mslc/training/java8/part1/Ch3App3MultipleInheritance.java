@@ -10,9 +10,9 @@ public class Ch3App3MultipleInheritance {
 	 * </p>
 	 * 
 	 * <ol>
-	 * <li>Any class wins over any interface. So if there’s a method with a
-	 * body, or an abstract declaration, in the superclass chain, we can ignore
-	 * the interfaces completely.</li>
+	 * <li>Any class wins over any interface. So if there’s a method with a body, or
+	 * an abstract declaration, in the superclass chain, we can ignore the
+	 * interfaces completely.</li>
 	 * <li>Subtype wins over supertype. If we have a situation in which two
 	 * interfaces are competing to provide a default method and one interface
 	 * extends the other, the subclass wins.</li>
@@ -28,10 +28,9 @@ public class Ch3App3MultipleInheritance {
 
 		TheHealthInsurance i = new TheHealthInsurance();
 		i.getMaxInsuranceAmount();
-		
+
 	}
 }
-
 
 interface AccidentInsurance {
 
@@ -41,6 +40,7 @@ interface AccidentInsurance {
 		return 100000;
 	}
 }
+
 interface DentalInsurance {
 
 	default public int getMaxInsuranceAmount() {
@@ -49,11 +49,12 @@ interface DentalInsurance {
 		return 5000;
 	}
 }
+
 class TheHealthInsurance implements AccidentInsurance, DentalInsurance {
 
 	@Override
 	public int getMaxInsuranceAmount() {
-		
+
 		// It can very well be DentalInsurance.super.getMaxInsuranceAmount()
 		return AccidentInsurance.super.getMaxInsuranceAmount();
 	}

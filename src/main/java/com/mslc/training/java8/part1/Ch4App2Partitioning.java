@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import com.mslc.training.java8.model.Employee;
 import com.mslc.training.java8.model.HealthData;
 
-public class Ch4App2Paritioning {
+public class Ch4App2Partitioning {
 
 	/**
 	 * Partition by employee that has dependents and those 

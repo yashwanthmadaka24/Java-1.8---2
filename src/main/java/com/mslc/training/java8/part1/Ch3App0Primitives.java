@@ -27,6 +27,21 @@ public class Ch3App0Primitives {
 		LongStream lStream = LongStream.of(12, 13, 14, 17);
 		DoubleStream dStream = DoubleStream.of(12.2, 13.4, 15.5, 17.5);
 		
+		
+		LongStream.Builder b =   LongStream.builder();
+		b.accept(12);
+		b.accept(15);
+		b.add(21);
+		System.out.println(" --- ");
+		b.build().forEach(System.out::println);
+		System.out.println(" --- ");
+		
+		Stream<String> s = Stream.of("20", "15" , "10");
+		s.sorted()
+		   .map(x -> x)
+		   .limit(2)
+		   .forEach(System.out::println);
+	
 
 		// int takes 4 bytes whereas Integer takes 16 bytes.
 		// Boxing / Autoboxing & Unboxing is expensive - in the

@@ -11,9 +11,17 @@ import com.mslc.training.java8.model.HealthData;
 
 public class Ch2App5RefactoringLegacyCode {
 
-	
 	public static void main(String[] args) {
-		
+
+		/**
+		 * Exercise 1: Find list of all employees that has at-least one healthplan as
+		 * comprehensive. Note that if the name of plan has "compre" then it is
+		 * comprehensive
+		 * 
+		 * 
+		 * Hint for java8 code :
+		 * 
+		 */
 		// @formatter:off
 
 		List<Employee> emps = HealthData
@@ -36,22 +44,6 @@ public class Ch2App5RefactoringLegacyCode {
 		
 		
 		System.out.println(emps2);
-		
-		
-				 
-		// @formatter:on
-		
-		
-		
-		if (true) {
-			return;
-		}
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -203,7 +195,6 @@ public class Ch2App5RefactoringLegacyCode {
 		System.out.println(allEmpsWithComprePlans);
 		 
 		// @formatter:on
-		
-			
+
 	}
 }

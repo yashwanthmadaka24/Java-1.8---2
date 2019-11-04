@@ -10,6 +10,11 @@ import com.mslc.training.java8.model.HealthData;
 public class Ch1App1OOTBFunctionalInterfaces2 {
 
 	public static void main(String[] args) {
+		
+		
+	
+			
+			
 
 		List<Employee> empList = HealthData.employeeList;
 		List<String> newList = mutateEmployeeToStringJava8(empList, emp -> emp.getName());
