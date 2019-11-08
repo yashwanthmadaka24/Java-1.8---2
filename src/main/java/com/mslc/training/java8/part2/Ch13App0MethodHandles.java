@@ -10,13 +10,15 @@ public class Ch13App0MethodHandles {
 
 		MethodHandles.Lookup lookup = MethodHandles.lookup();
 
-		MethodType methodType = MethodType.methodType(int.class, new Class<?>[] { String.class });
+		MethodType methodType = MethodType.methodType(int.class, new Class<?>[] { String.class});
 
 		MethodHandle methodHandle = lookup.findStatic(Counter.class, "count", methodType);
+		
 
-		 int count = (int) methodHandle.invokeExact("Muhammed Shakir");
+		int count = (int) methodHandle.invokeExact("Muhammed Shakir");
+
 		//
-		 System.out.println("Count : " + count);
+		System.out.println("Count : " + count);
 
 		// Following illustrates the difference between invokeExact and invoke
 		// which is, invokeExact will not do auto-type conversion where as
@@ -29,8 +31,8 @@ public class Ch13App0MethodHandles {
 		 */
 
 		/*
-		 * All the following will work (invoke is used instead of invokeExact)
-		 * int count1 = (int) methodHandle.invoke((Object) "foo");
+		 * All the following will work (invoke is used instead of invokeExact) int
+		 * count1 = (int) methodHandle.invoke((Object) "foo");
 		 * methodHandle.invoke("foo");
 		 */
 		// int count1 = (int) methodHandle.invoke((Object) "foo");
@@ -46,11 +48,13 @@ class Counter {
 
 	static int count(String name) {
 
-		return name.length();
+		return name.length() ;
 
 	}
 
 	private static int count2(String name) {
+
+		System.out.println("In count2");
 
 		return name.length() + 5;
 

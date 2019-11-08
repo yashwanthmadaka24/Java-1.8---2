@@ -1,8 +1,11 @@
 package com.mslc.training.java8.part1;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -60,16 +63,14 @@ public class Ch4App0MethodReferences {
 		// constructor 2 gets executed
 		ClassA aNew = f2.apply("Constructor 2");
 
-		
 		MyFunctionalInterfaceToTest<String, Integer, ClassA> f3 = ClassA::new;
-		
+
 		// f3.testing actually results in executing the constructor
 		ClassA a3 = f3.testing("asdsa", 22);
 		a3.subtract("asdsadasd");
-		
-		
+
 		BiFunction<String, Integer, ClassA> f4 = ClassA::new;
-		
+
 		f4.apply("asdd", 22);
 
 	}
@@ -190,7 +191,38 @@ class HealthInsuranceService {
 	public String deactivateInsurance(String insuranceName) {
 
 		System.out.println("in deactivateInsurance : " + insuranceName + " -- " + this);
+
+		Consumer<Person> pf = Person::printName;
+		new PersonProcessor().processPerson(pf);
+
 		return "this";
 	}
 
+}
+
+class PersonProcessor {
+
+	public void processPerson(Consumer<Person> pf) {
+		List<Person> persons = Arrays.asList(new Person[] { new Person("Shakir"), new Person("Farhan") });
+		for (Person p : persons) {
+			pf.accept(p);
+		}
+
+	}
+}
+
+class Person {
+	private String name;
+
+	public Person() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Person(final String name) {
+		this.name = name;
+	}
+
+	public void printName() {
+		System.out.println(name);
+	}
 }
